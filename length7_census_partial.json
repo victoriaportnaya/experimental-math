@@ -1,0 +1,13 @@
+{
+  "ell7_begin_end_1_partial": {
+    "ell": 7,
+    "universe_size": 32,
+    "total_sets": 4294967296,
+    "evaluated_orbits": 30,
+    "truncated": true,
+    "symmetry_audit_orbits": 24,
+    "symmetry_mismatch_orbits": 0,
+    "noncorrelated_count": 0
+  },
+  "runtime_seconds": 197.9033989906311
+}

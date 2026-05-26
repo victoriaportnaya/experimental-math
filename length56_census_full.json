@@ -1,0 +1,22 @@
+{
+  "ell5_begin_end_1": {
+    "ell": 5,
+    "universe_size": 8,
+    "total_sets": 256,
+    "evaluated_orbits": 46,
+    "truncated": false,
+    "symmetry_audit_orbits": 24,
+    "symmetry_mismatch_orbits": 0,
+    "noncorrelated_count": 1
+  },
+  "ell6_begin_end_1_full": {
+    "ell": 6,
+    "universe_size": 16,
+    "total_sets": 65536,
+    "evaluated_orbits": 5056,
+    "truncated": false,
+    "symmetry_audit_orbits": 24,
+    "symmetry_mismatch_orbits": 0,
+    "noncorrelated_count": 1
+  }
+}

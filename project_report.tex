@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Experimental Study of Noncorrelation in Automatic Pattern Sequences}
+\author{Project Notes}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Problem statement}
+Let $a=(a(n))_{n\ge 0}$ be a sequence with values in $\{\pm 1\}$. Its self-correlation coefficients are
+\[
+\gamma_a(m) = \lim_{N\to\infty}\frac1N\sum_{n=0}^{N-1}a(n)a(n+m),
+\]
+when the limit exists. The sequence is called \emph{noncorrelated} if $\gamma_a(m)=0$ for all $m\neq 0$.
+
+The project goal is to gather computational evidence on noncorrelation for automatic sequences, especially binary pattern sequences.
+
+\section{Core definitions}
+\subsection*{Automatic sequences}
+Fix base $k\ge 2$. The $k$-kernel of a sequence $a:\mathbb{N}_0\to \mathbb{C}$ is
+\[
+\mathcal{K}_k(a):=\{(a(k^i n+r))_{n\ge 0}: i\ge 0,\ 0\le r<k^i\}.
+\]
+A sequence is $k$-automatic iff its $k$-kernel is finite (Eilenberg; see \cite{AS03}).
+
+\subsection*{Pattern sequences}
+For a finite pattern set $A\subset \{0,1\}^*$, define
+\[
+a_A(n)=(-1)^{\#(A,n)},
+\]
+where $\#(A,n)$ is the number of occurrences (with overlaps) of patterns from $A$ in the binary expansion of $n$, with the usual leading-zero padding convention from \cite{Kon21}.
+
+Examples:
+\begin{itemize}
+  \item Thue--Morse: $t(n)=(-1)^{s_2(n)}=a_{\{1\}}(n)$.
+  \item Rudin--Shapiro: $r(n)=(-1)^{\#(11,n)}=a_{\{11\}}(n)$.
+\end{itemize}
+
+\section{Important reference results}
+\begin{itemize}
+  \item \textbf{Thue--Morse correlation profile:} $\lim_{M\to\infty}\frac1M\sum_{m=0}^{M-1}\gamma_t(m)^2=0$, while $\limsup_{m\to\infty}|\gamma_t(m)|=1/3$ (classical results summarized in \cite{Kon21}).
+  \item \textbf{Rudin--Shapiro noncorrelation:} $r$ is noncorrelated (equivalently, spectral measure is Lebesgue), discussed in \cite{Kon21,ZPK18}.
+  \item \textbf{Classification for short patterns:} complete classification for binary pattern sets of length $\le 3$ in \cite{ZPK18}.
+  \item \textbf{Algorithmic classification:} \cite{Kon21} proves there is an algorithm deciding noncorrelation of a given binary pattern sequence; it also reports exactly $2272$ noncorrelated binary pattern sequences for pattern length $\le 4$.
+  \item \textbf{Conjectural structure:} for dilation-invariant pattern sets (patterns begin/end with $1$), \cite{Kon21} gives a sufficient condition and a conjectured converse (verified computationally for length $\le 5$).
+  \item \textbf{$k$-regular framework:} \cite{AS92,AS03b} establish the $k$-regular sequence machinery and closure properties, which underlies algorithmic manipulations of correlation-related sequences.
+\end{itemize}
+
+\section{Experimental setup}
+All experiments were run with a reproducible script (\texttt{experiments.py}) using empirical coefficients
+\[
+\gamma_{a,N}(m)=\frac1N\sum_{n=0}^{N-1}a(n)a(n+m),
+\]
+with $N=8192$ and $1\le m\le 64$. FFT-based convolution was used to compute all shifts efficiently.
+
+The output was saved to \texttt{results.json}. We report:
+\begin{enumerate}
+  \item sanity checks on named sequences;
+  \item exhaustive scan of all pattern sets with pattern length $\le 3$ (2048 sets);
+  \item tests of the family $A_\ell=1\{0,1\}^{\ell-2}1$ for $\ell=2,\dots,6$;
+  \item random sampling of pattern sets with maximum length $\le 4$.
+\end{enumerate}
+
+\section{Main findings}
+\subsection*{1) Sanity checks}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Sequence & $\max_{1\le m\le 64}|\gamma_{a,N}(m)|$ & mean of $\gamma_{a,N}(m)^2$ ($m\ge 1$) \\
+\midrule
+Thue--Morse ($A=\{1\}$) & $0.33594$ & $2.9986\times 10^{-2}$ \\
+Rudin--Shapiro ($A=\{11\}$) & $0.00183$ & $3.0547\times 10^{-7}$ \\
+$r\cdot t$ ($A=\{11,1\}$) & $0.00232$ & $2.7567\times 10^{-7}$ \\
+$A=\{101,111\}$ & $0.00134$ & $1.8626\times 10^{-7}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This matches the expected contrast: Thue--Morse has large exceptional correlations, while Rudin--Shapiro-type examples are near zero at this scale.
+
+\subsection*{2) Exhaustive patterns of length $\le 3$}
+Among all $2048$ pattern sets (excluding all-zero patterns), many show very small empirical correlations. The smallest observed value of $\max_{1\le m\le 64}|\gamma_{a,N}(m)|$ is about $1.34\times10^{-3}$ for multiple sets (e.g.\ $\{101,111\}$ and several equivalent variants under simple transforms).
+
+This is consistent with the known complete classification for length $\le 3$ in \cite{ZPK18}, though our experiment is numerical rather than a proof.
+
+\subsection*{3) Dilation-invariant core family}
+For $A_\ell=1\{0,1\}^{\ell-2}1$:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+$\ell$ & $|A_\ell|$ & $\max_{1\le m\le 64}|\gamma_{a,N}(m)|$ \\
+\midrule
+2 & 1 & $0.00183$ \\
+3 & 2 & $0.00134$ \\
+4 & 4 & $0.00159$ \\
+5 & 8 & $0.00085$ \\
+6 & 16 & $0.00037$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The trend is strongly compatible with noncorrelation and with the sufficient-condition philosophy in \cite{Kon21,ZPK18}.
+
+\subsection*{4) Random length $\le 4$ sets}
+In a random sample of 120 sets, the distribution of $\max_{1\le m\le 64}|\gamma_{a,N}(m)|$ is much larger:
+\[
+q_{10}=0.103,\quad q_{50}=0.188,\quad q_{90}=0.375,\quad q_{99}=0.498.
+\]
+Hence near-noncorrelated behavior is rare in random families and appears highly structured.
+
+\section{Interpretation and next steps}
+\begin{itemize}
+  \item The computations clearly separate structured noncorrelated candidates from generic pattern sets.
+  \item The family $1\{0,1\}^{\ell-2}1$ continues to look exceptional as $\ell$ grows.
+  \item A second pass with larger $N$ ($2^{14},2^{15},2^{16}$) confirms stable large peaks for Thue--Morse and decay for noncorrelated candidates.
+  \item A useful next step is to implement the exact finite algorithmic test from \cite{Kon21} so empirical candidates can be certified.
+\end{itemize}
+
+\section{Advanced experimental extensions}
+I added a second research script, \texttt{advanced\_experiments.py}, to support:
+\begin{itemize}
+  \item finite-algorithm implementation attempt (Section 4 style recursion/basis construction from \cite{Kon21});
+  \item symmetry-reduced constrained-family census (length 5/6, begin/end with 1);
+  \item convergence-rate fitting $\max_{m\le M}|\gamma_{a,N}(m)|\sim C N^{-\alpha}$;
+  \item spectral proxies from periodograms (entropy, top-mass, peak size, $L^2$ power).
+\end{itemize}
+
+The run output is saved in \texttt{advanced\_results.json}. The convergence/spectral
+parts are stable and informative:
+\begin{itemize}
+  \item For Thue--Morse, the fitted exponent is $\alpha\approx 0.009$, consistent with
+  non-decay of the maximal correlations.
+  \item For Rudin--Shapiro and related examples, the fit gives $\alpha\approx 1.0$
+  over $N=2^{12},\dots,2^{16}$, indicating near $1/N$ decay in the maximal observed coefficient.
+  \item Spectral proxies separate the families sharply: Thue--Morse has much larger
+  peak mass and lower entropy than Rudin--Shapiro-type sequences.
+  \item After fixing the boundary recursion in the exact engine, benchmark invariants now
+  pass: Rudin--Shapiro ($\{11\}$), $\{11,1\}$, and $\{101,111\}$ are detected as
+  noncorrelated, while Thue--Morse is not.
+  \item The full constrained census for begin/end-$1$ families is completed: for
+  $\ell=5$ (256 sets) and $\ell=6$ (65536 sets), symmetry reduction yields 46 and
+  5056 evaluated orbits respectively, and exactly one noncorrelated set in each case
+  (the core family $1\{0,1\}^{\ell-2}1$ up to the tested symmetries).
+\end{itemize}
+
+\appendix
+\section{Second-pass convergence comparison ($N=2^{14},2^{15},2^{16}$)}
+The script \texttt{convergence\_pass.py} runs a focused second pass and saves:
+\texttt{results\_multiscale.json}, \texttt{convergence\_named\_maxabs.csv},
+\texttt{convergence\_family\_maxabs.csv}, and two plots
+(\texttt{convergence\_named\_maxabs.png}, \texttt{convergence\_family\_maxabs.png}).
+
+\subsection*{A. Named sequences}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Sequence & $N=2^{14}$ & $N=2^{15}$ & $N=2^{16}$ \\
+\midrule
+Thue--Morse ($A=\{1\}$) & $0.333984$ & $0.333984$ & $0.333496$ \\
+Rudin--Shapiro ($A=\{11\}$) & $9.16\times 10^{-4}$ & $4.58\times 10^{-4}$ & $2.29\times 10^{-4}$ \\
+$r\cdot t$ ($A=\{11,1\}$) & $1.16\times 10^{-3}$ & $5.80\times 10^{-4}$ & $2.90\times 10^{-4}$ \\
+$A=\{101,111\}$ & $6.71\times 10^{-4}$ & $3.36\times 10^{-4}$ & $1.68\times 10^{-4}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{B. Dilation-invariant core family}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Family $A_\ell=1\{0,1\}^{\ell-2}1$ & $N=2^{14}$ & $N=2^{15}$ & $N=2^{16}$ \\
+\midrule
+$\ell=2$ & $9.16\times 10^{-4}$ & $4.58\times 10^{-4}$ & $2.29\times 10^{-4}$ \\
+$\ell=3$ & $6.71\times 10^{-4}$ & $3.36\times 10^{-4}$ & $1.68\times 10^{-4}$ \\
+$\ell=4$ & $7.93\times 10^{-4}$ & $3.97\times 10^{-4}$ & $1.98\times 10^{-4}$ \\
+$\ell=5$ & $4.27\times 10^{-4}$ & $2.14\times 10^{-4}$ & $1.07\times 10^{-4}$ \\
+$\ell=6$ & $1.83\times 10^{-4}$ & $9.16\times 10^{-5}$ & $4.58\times 10^{-5}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Empirically, near-noncorrelated families roughly halve their maximal observed
+correlations when $N$ doubles, while Thue--Morse remains pinned near $1/3$.
+
+\begin{thebibliography}{99}
+\bibitem{ZPK18}
+Y. Zheng, L. Peng, and T. Kamae,
+\newblock Characterization of noncorrelated pattern sequences and correlation dimensions,
+\newblock \emph{Discrete and Continuous Dynamical Systems} 38 (2018), no. 10, 5085--5103.
+
+\bibitem{Kon21}
+J. Konieczny,
+\newblock Algorithmic classification of noncorrelated binary pattern sequences,
+\newblock \emph{Journal of Number Theory} 223 (2021), 229--254,
+\newblock \url{https://arxiv.org/abs/1905.03283}.
+
+\bibitem{AS03}
+J.-P. Allouche and J. Shallit,
+\newblock \emph{Automatic Sequences: Theory, Applications, Generalizations},
+\newblock Cambridge University Press, 2003.
+
+\bibitem{AS92}
+J.-P. Allouche and J. Shallit,
+\newblock The ring of $k$-regular sequences,
+\newblock \emph{Theoretical Computer Science} 98 (1992), no. 2, 163--197.
+
+\bibitem{AS03b}
+J.-P. Allouche and J. Shallit,
+\newblock The ring of $k$-regular sequences, II,
+\newblock \emph{Theoretical Computer Science} 307 (2003), no. 1, 3--29.
+\end{thebibliography}
+
+\end{document}

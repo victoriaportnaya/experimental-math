@@ -1,0 +1,200 @@
+{
+  "exact_decision_named": {
+    "Thue-Morse": {
+      "ell": 1,
+      "noncorrelated": false,
+      "basis_size": 5,
+      "witness_value": "-2/3"
+    },
+    "Rudin-Shapiro": {
+      "ell": 2,
+      "noncorrelated": true,
+      "basis_size": 17,
+      "witness_value": null
+    },
+    "RS*TM": {
+      "ell": 2,
+      "noncorrelated": true,
+      "basis_size": 17,
+      "witness_value": null
+    },
+    "{101,111}": {
+      "ell": 3,
+      "noncorrelated": true,
+      "basis_size": 68,
+      "witness_value": null
+    }
+  },
+  "constrained_classification": {
+    "ell5_begin_end_1": {
+      "ell": 5,
+      "universe_size": 8,
+      "total_sets": 256,
+      "evaluated_orbits": 155,
+      "symmetry_audit_orbits": 24,
+      "symmetry_mismatch_orbits": 0,
+      "noncorrelated_count": 0
+    },
+    "ell6_begin_end_1": {
+      "ell": 6,
+      "universe_size": 16,
+      "total_sets": 65536,
+      "evaluated_orbits": 33179,
+      "symmetry_audit_orbits": 24,
+      "symmetry_mismatch_orbits": 0,
+      "noncorrelated_count": 0
+    },
+    "ell7_begin_end_1_partial": {
+      "ell": 7,
+      "universe_size": 32,
+      "total_sets": 4294967296,
+      "evaluated_orbits": 30,
+      "truncated": true,
+      "symmetry_audit_orbits": 24,
+      "symmetry_mismatch_orbits": 0,
+      "noncorrelated_count": 0
+    },
+    "ell5_fresh": {
+      "ell": 5,
+      "universe_size": 8,
+      "total_sets": 256,
+      "evaluated_orbits": 46,
+      "truncated": false,
+      "symmetry_audit_orbits": 24,
+      "symmetry_mismatch_orbits": 0,
+      "noncorrelated_count": 1
+    }
+  },
+  "decay_fits": {
+    "Thue-Morse": {
+      "patterns": [
+        "1"
+      ],
+      "n_values": [
+        4096,
+        8192,
+        16384,
+        32768,
+        65536
+      ],
+      "max_abs_values": [
+        0.34375,
+        0.3359375,
+        0.3359375,
+        0.333984375,
+        0.333984375
+      ],
+      "alpha": 0.009157044731899803,
+      "C": 0.36798831414029837
+    },
+    "Rudin-Shapiro": {
+      "patterns": [
+        "11"
+      ],
+      "n_values": [
+        4096,
+        8192,
+        16384,
+        32768,
+        65536
+      ],
+      "max_abs_values": [
+        0.008056640625,
+        0.0040283203125,
+        0.00201416015625,
+        0.001007080078125,
+        0.0005035400390625
+      ],
+      "alpha": 0.9999999999999997,
+      "C": 32.9999999999999
+    },
+    "Rudin-Shapiro*Thue-Morse": {
+      "patterns": [
+        "11",
+        "1"
+      ],
+      "n_values": [
+        4096,
+        8192,
+        16384,
+        32768,
+        65536
+      ],
+      "max_abs_values": [
+        0.008544921875,
+        0.0042724609375,
+        0.00213623046875,
+        0.001068115234375,
+        0.0005340576171875
+      ],
+      "alpha": 0.9999999999999999,
+      "C": 34.99999999999993
+    },
+    "{101,111}": {
+      "patterns": [
+        "101",
+        "111"
+      ],
+      "n_values": [
+        4096,
+        8192,
+        16384,
+        32768,
+        65536
+      ],
+      "max_abs_values": [
+        0.005615234375,
+        0.0028076171875,
+        0.00140380859375,
+        0.000701904296875,
+        0.0003509521484375
+      ],
+      "alpha": 0.9999999999999996,
+      "C": 22.999999999999876
+    }
+  },
+  "spectral_proxies": {
+    "Thue-Morse": {
+      "N": 32768,
+      "patterns": [
+        "1"
+      ],
+      "max_nonzero_periodogram": 0.01275537330698513,
+      "spectral_entropy": 6.522975265846081,
+      "top10_mass": 0.11374639770606439,
+      "l2_power": 0.0008426718413829801
+    },
+    "Rudin-Shapiro": {
+      "N": 32768,
+      "patterns": [
+        "11"
+      ],
+      "max_nonzero_periodogram": 6.103438708695019e-05,
+      "spectral_entropy": 9.510845343797033,
+      "top10_mass": 0.0012201835765459196,
+      "l2_power": 2.0343810319900513e-05
+    },
+    "Rudin-Shapiro*Thue-Morse": {
+      "N": 32768,
+      "patterns": [
+        "11",
+        "1"
+      ],
+      "max_nonzero_periodogram": 6.103476108448258e-05,
+      "spectral_entropy": 9.51072743572681,
+      "top10_mass": 0.0012205449494724113,
+      "l2_power": 2.034381031990051e-05
+    },
+    "{101,111}": {
+      "N": 32768,
+      "patterns": [
+        "101",
+        "111"
+      ],
+      "max_nonzero_periodogram": 0.00012053450534386556,
+      "spectral_entropy": 9.319110367660048,
+      "top10_mass": 0.002374283525101434,
+      "l2_power": 2.707354724407196e-05
+    }
+  }
+}
