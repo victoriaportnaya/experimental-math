@@ -1,0 +1,223 @@
+{
+  "config": {
+    "patterns": [
+      "11"
+    ],
+    "k": 2,
+    "N": 16384,
+    "m_max": 16,
+    "definition": "gamma_N(m) = (1/N) * sum_{n=0}^{N-1} a(n) * conj(a(n+m))",
+    "representation": "exact residue-count cyclotomic expansion"
+  },
+  "max_abs_nonzero_approx": 6.123233995736766e-17,
+  "rows": [
+    {
+      "m": 1,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 2,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 3,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 4,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 5,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 6,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 7,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 8,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 9,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 10,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 11,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 12,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 13,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 14,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 15,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    },
+    {
+      "m": 16,
+      "residue_counts": [
+        8192,
+        8192
+      ],
+      "symbolic": "(1/16384) * (8192 + 8192*zeta^1)",
+      "rational_projection": {
+        "real": "0",
+        "imag": "0"
+      },
+      "approx_abs": 6.123233995736766e-17
+    }
+  ]
+}

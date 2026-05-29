@@ -78,7 +78,7 @@ def main() -> None:
         "config": {
             "n_values": n_values,
             "m_max": args.m_max,
-            "definition": "gamma_N(m) = (1/N) * sum_{n=0}^{N-1} a(n)a(n+m)",
+            "definition": "gamma_N(m) = (1/N) * sum_{n=0}^{N-1} a(n) * conj(a(n+m))",
         },
         "named_sequences_by_n": named,
         "dilation_family_by_n": fam,

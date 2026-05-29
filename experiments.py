@@ -4,7 +4,13 @@
 The sequence attached to a finite pattern set A is
     a_A(n) = (-1)^{#(A, n)},
 where #(A, n) counts (with overlaps) occurrences of each pattern in
-the binary expansion of n padded with leading zeros.
+the binary expansion of n padded with sufficiently many leading zeros.
+
+Convention used here:
+- If max pattern length in A is L, we represent n as
+      0^(L-1) || bin(n).
+- This guarantees boundary occurrences are counted, e.g. for A containing
+  "01", the number 1 contributes one occurrence from "01".
 """
 
 from __future__ import annotations
@@ -34,11 +40,16 @@ def count_occurrences_with_overlaps(text: str, pattern: str) -> int:
     return sum(1 for i in range(len(text) - plen + 1) if text[i : i + plen] == pattern)
 
 
+def padded_binary_expansion(n: int, max_pattern_len: int) -> str:
+    """Binary expansion with sufficient leading zeros for boundary counting."""
+    return "0" * max(0, max_pattern_len - 1) + format(n, "b")
+
+
 def count_pattern_set(n: int, patterns: tuple[str, ...]) -> int:
     if not patterns:
         return 0
     max_len = max(len(p) for p in patterns)
-    padded = "0" * (max_len - 1) + format(n, "b")
+    padded = padded_binary_expansion(n, max_len)
     return sum(count_occurrences_with_overlaps(padded, p) for p in patterns)
 
 
@@ -178,11 +189,18 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=Path("results.json"))
     args = parser.parse_args()
 
+    # Convention self-check: expansion of 1 must include boundary pattern "01".
+    assert count_pattern_set(1, ("01",)) == 1, (
+        "Leading-zero convention check failed: expected #({01},1)=1"
+    )
+
     result = {
         "config": {
             "N": args.n,
             "m_max": args.m_max,
-            "definition": "gamma_N(m) = (1/N) * sum_{n=0}^{N-1} a(n)a(n+m)",
+            # For real-valued sequences this equals (1/N) sum a(n)a(n+m).
+            "definition": "gamma_N(m) = (1/N) * sum_{n=0}^{N-1} a(n) * conj(a(n+m))",
+            "leading_zero_convention": "use 0^(L-1)||bin(n), where L=max pattern length",
         },
         "named_sequences": [r.to_json() for r in run_named_sequences(args.n, args.m_max)],
         "exhaustive_len_le_3": exhaustive_upto_len3(args.n, args.m_max),

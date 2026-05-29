@@ -8,7 +8,9 @@ define the k-valued automatic sequence
     a_{A,k}(n) = omega^{#(A, n)}
 
 where #(A, n) counts (with overlaps) occurrences of patterns in A in the
-binary expansion of n.  The standard {+1,-1} Rudin-Shapiro / Thue-Morse
+binary expansion of n using sufficient leading-zero padding
+0^(L-1)||bin(n), where L is the max pattern length in A.
+The standard {+1,-1} Rudin-Shapiro / Thue-Morse
 setting corresponds to k=2, omega = -1.
 
 Noncorrelation for a complex-valued sequence means:
@@ -74,7 +76,7 @@ def omega_sequence(patterns: tuple[str, ...], k: int, n_max: int) -> np.ndarray:
     The result dtype is complex128 (float for k=2).
     """
     omega = np.exp(2j * np.pi / k)
-    # Vectorised: compute counts, then raise omega to those powers
+    # Vectorized: compute counts with leading-zero convention, then raise powers.
     counts = np.array([count_pattern_set(n, patterns) for n in range(n_max)], dtype=np.int64)
     if k == 2:
         return np.where(counts % 2 == 0, 1.0, -1.0).astype(np.float64)
@@ -320,6 +322,13 @@ def correlation_profiles(candidates: list[tuple[tuple[str,...], int]],
 
 def main(n_max: int = N_DEFAULT) -> None:
     out: dict = {}
+
+    # Convention checks:
+    # - Leading-zero boundary: #({01},1)=1.
+    # - Complex conjugate form: gamma uses a(n)*conj(a(n+m)).
+    assert count_pattern_set(1, ("01",)) == 1, (
+        "Leading-zero convention check failed: expected #({01},1)=1"
+    )
 
     print(f"\n{'='*60}")
     print(f"Complex-rooted sequence experiments  (N={n_max})")
